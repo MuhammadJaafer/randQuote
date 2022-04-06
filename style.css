@@ -1,0 +1,58 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #ffd43a;
+  font-family: "Cormorant Garamond", serif;
+}
+/* <-------->header<--------> */
+header {
+  height: 10vh;
+}
+header h1 {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-family: "Marck Script", serif;
+  font-size: 2.5em;
+}
+/* <-------->main<--------> */
+section {
+}
+.save--copy {
+}
+.save--copy img {
+}
+.quote--container {
+}
+.quotation {
+}
+.quote--text {
+}
+.quote--text p {
+}
+.quote-outher {
+}
+.quote-outher p {
+}
+.quote--btn {
+}
+.quote--btn button {
+}
+/* <-------->footer<--------> */
+footer {
+}
+.footer--text {
+}
+.footer--text p {
+}
+.icons {
+}
+.icons i {
+}
+#github {
+}
+#linkedin {
+}
+#facebook {
+}

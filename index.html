@@ -4,9 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Marck+Script&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/63f37eb4e0.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./style.css" />
     <script defer src="./script.js"></script>
     <title>randQuote</title>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <header>
+        <h1>randQuote</h1>
+      </header>
+      <section>
+        <div class="save--copy">
+          <img src="./icons/copy.svg" alt="copy" />
+          <img src="./icons/Save.svg" alt="save" />
+        </div>
+        <div class="quote--container">
+          <img class="quotation" src="./icons/quotation.svg" alt="quotation" />
+          <img class="quotation" src="./icons/quotation.svg" alt="quotation" />
+          <div class="quote--text">
+            <p>
+              If you want to live a happy life, tie it to a goal, not to people
+              or things.
+            </p>
+          </div>
+          <div class="quote-outher"><p>Albert Einstein</p></div>
+        </div>
+        <div class="quote--btn"><button>New Quote</button></div>
+      </section>
+      <footer>
+        <div class="footer--text"><p>Developed by this guy</p></div>
+        <div class="icons">
+          <i id="github" class="fa-brands fa-github-square"></i>
+          <i id="linkedin" class="fa-brands fa-linkedin"></i>
+          <i id="facebook" class="fa-brands fa-facebook"></i>
+        </div>
+      </footer>
+    </main>
+  </body>
 </html>
