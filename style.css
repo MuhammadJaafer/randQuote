@@ -45,6 +45,10 @@ section {
 .save--copy img {
   width: 2em;
   cursor: pointer;
+  transition: 0.4s;
+}
+.save--copy img:hover {
+  transform: scale(1.1);
 }
 .quote--container {
   width: 70vw;
@@ -110,6 +114,10 @@ section {
   font-size: 2em;
   cursor: pointer;
   min-width: 150px;
+  transition: 0.4s;
+}
+.quote--btn button:hover {
+  transform: scale(1.04);
 }
 /* <-------->footer<--------> */
 footer {
