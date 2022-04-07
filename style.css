@@ -6,7 +6,9 @@ body {
 
   font-family: "Cormorant Garamond", serif;
 }
-
+html {
+  min-height: 100%;
+}
 body {
   background: #ffd43a;
 }
@@ -79,14 +81,15 @@ section {
 }
 .quote-outher {
   position: absolute;
-  bottom: 8%;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
 .quote-outher p {
   text-align: center;
   font-size: 2em;
-  border-bottom: solid 2px black;
+  border-bottom: solid 3px black;
+  width: 115%;
 }
 .quote--btn {
   position: absolute;
@@ -106,18 +109,38 @@ section {
 }
 /* <-------->footer<--------> */
 footer {
+  position: absolute;
+  bottom: 0;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 10px;
 }
 .footer--text {
+  margin-left: 10px;
 }
 .footer--text p {
+  font-size: 2em;
 }
 .icons {
+  display: flex;
+  gap: 20px;
+  transform: translateY(4px);
 }
 .icons i {
+  cursor: pointer;
+  font-size: 1.8em;
+  transition: 0.3s ease-out;
 }
-#github {
+#github:hover {
+  background: white;
+  border-radius: 100%;
 }
-#linkedin {
+#linkedin:hover {
+  color: #0077b5;
 }
-#facebook {
+#facebook:hover {
+  color: #2f529f;
 }
