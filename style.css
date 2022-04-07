@@ -131,16 +131,12 @@ footer {
 .icons {
   display: flex;
   gap: 20px;
-  transform: translateY(4px);
+  transform: translateY(0px);
 }
 .icons i {
   cursor: pointer;
   font-size: 1.8em;
   transition: 0.3s ease-out;
-}
-#github:hover {
-  background: white;
-  border-radius: 100%;
 }
 #linkedin:hover {
   color: #0077b5;
