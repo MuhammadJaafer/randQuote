@@ -16,6 +16,9 @@ main {
   max-width: 1920px;
   margin: 0 auto;
 }
+a {
+  all: unset;
+}
 /* <-------->header<--------> */
 header {
   height: 100px;
