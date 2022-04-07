@@ -165,7 +165,7 @@ footer {
   .save--copy {
     flex-direction: row-reverse;
     right: 0;
-    top: -50px;
+    top: -45px;
   }
   .save--copy img {
     width: 1.8em;
@@ -178,6 +178,9 @@ footer {
 @media screen and (max-width: 550px) {
   section {
     width: 90vw;
+  }
+  .save--copy {
+    top: -40px;
   }
   .quote--container {
     width: 90vw;
