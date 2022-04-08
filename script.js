@@ -5,6 +5,7 @@ const copyBtnEl = document.querySelector("#copy--btn");
 const saveBtnEl = document.querySelector("#save--btn");
 const popupEl = document.querySelector("#custom-tooltip");
 const captureEl = document.querySelector(".quote--container");
+const authorLinkEl = document.querySelector("#auther--link");
 // >>>>>>>>>>>>>>>>>>>>>>>> //
 
 class App {
@@ -31,6 +32,7 @@ class App {
   _displayNewQuote(quote, author) {
     quoteTextEl.textContent = quote;
     quoteAuthorEl.textContent = author;
+    authorLinkEl.href = `https://en.wikipedia.org/wiki/${author}`;
   }
   _copyCurrentQuote() {
     const el = document.createElement("textarea");

@@ -18,6 +18,7 @@ main {
 }
 a {
   all: unset;
+  cursor: pointer;
 }
 /* <-------->header<--------> */
 header {
