@@ -234,6 +234,7 @@ footer {
   }
   .quote-outher p {
     font-size: 1.3em;
+    border-bottom: solid 2px black;
   }
 }
 /* botton */
