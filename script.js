@@ -9,13 +9,19 @@ class App {
   #currentAuthor;
   constructor() {
     this._getNewQuote();
+    newQuoatBtnEl.addEventListener("click", this._getNewQuote.bind(this));
   }
   async _getNewQuote() {
-    const res = await fetch("https://api.fisenko.net/v1/quotes/en/random");
-    const slip = await res.json();
-    console.log(slip);
+    const res = await fetch("https://api.quotable.io/random");
+    const data = await res.json();
+    this.#currentQuote = data.content;
+    this.#currentAuthor = data.author;
+    this._displayNewQuote(this.#currentQuote, this.#currentAuthor);
   }
-  _displayNewQuote() {}
+  _displayNewQuote(quote, author) {
+    quoteTextEl.textContent = quote;
+    quoteAuthorEl.textContent = author;
+  }
   _copyCurrentQuote() {}
   _saveCurrentQuote() {}
 }
