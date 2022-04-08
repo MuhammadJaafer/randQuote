@@ -3,7 +3,7 @@ const quoteAuthorEl = document.querySelector("#quote--outher");
 const newQuoatBtnEl = document.querySelector("#quote--btn");
 const copyBtnEl = document.querySelector("#copy--btn");
 const saveBtnEl = document.querySelector("#save--btn");
-const copypopupEl = document.querySelector("#custom-tooltip");
+const popupEl = document.querySelector("#custom-tooltip");
 const captureEl = document.querySelector(".quote--container");
 // >>>>>>>>>>>>>>>>>>>>>>>> //
 
@@ -41,9 +41,10 @@ class App {
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
-    copypopupEl.style.opacity = 100;
+    popupEl.textContent = "copied!";
+    popupEl.style.opacity = 100;
     setTimeout(() => {
-      copypopupEl.style.opacity = 0;
+      popupEl.style.opacity = 0;
     }, 1500);
   }
   async _saveCurrentQuote() {
@@ -61,6 +62,11 @@ class App {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    popupEl.textContent = "saving...";
+    popupEl.style.opacity = 100;
+    setTimeout(() => {
+      popupEl.style.opacity = 0;
+    }, 1500);
   }
 }
 const app = new App();
