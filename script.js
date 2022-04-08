@@ -50,6 +50,11 @@ class App {
     }, 1500);
   }
   async _saveCurrentQuote() {
+    popupEl.textContent = "saving...";
+    popupEl.style.opacity = 100;
+    setTimeout(() => {
+      popupEl.style.opacity = 0;
+    }, 1500);
     const canvas = await html2canvas(captureEl, {
       backgroundColor: "#FFD43A",
     });
@@ -64,11 +69,6 @@ class App {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    popupEl.textContent = "saving...";
-    popupEl.style.opacity = 100;
-    setTimeout(() => {
-      popupEl.style.opacity = 0;
-    }, 1500);
   }
 }
 const app = new App();
