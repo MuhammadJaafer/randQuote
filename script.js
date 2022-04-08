@@ -13,11 +13,15 @@ class App {
     newQuoatBtnEl.addEventListener("click", this._getNewQuote.bind(this));
   }
   async _getNewQuote() {
-    const res = await fetch("https://api.quotable.io/random");
-    const data = await res.json();
-    this.#currentQuote = data.content;
-    this.#currentAuthor = data.author;
-    this._displayNewQuote(this.#currentQuote, this.#currentAuthor);
+    try {
+      const res = await fetch("https://api.quotable.io/random");
+      const data = await res.json();
+      this.#currentQuote = data.content;
+      this.#currentAuthor = data.author;
+      this._displayNewQuote(this.#currentQuote, this.#currentAuthor);
+    } catch (err) {
+      console.log(err);
+    }
   }
   _displayNewQuote(quote, author) {
     quoteTextEl.textContent = quote;
