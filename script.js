@@ -3,19 +3,25 @@ const quoteAuthorEl = document.querySelector("#quote--outher");
 const newQuoatBtnEl = document.querySelector("#quote--btn");
 const copyBtnEl = document.querySelector("#copy--btn");
 const saveBtnEl = document.querySelector("#save--btn");
+const translateBtnEl = document.querySelector("#translate--btn");
 const popupEl = document.querySelector("#custom-tooltip");
 const captureEl = document.querySelector(".quote--container");
 const authorLinkEl = document.querySelector("#auther--link");
+
 // >>>>>>>>>>>>>>>>>>>>>>>> //
 
 class App {
   #currentQuote;
   #currentAuthor;
+  #lang = 0;
   constructor() {
     this._getNewQuote();
     newQuoatBtnEl.addEventListener("click", this._getNewQuote.bind(this));
     copyBtnEl.addEventListener("click", this._copyCurrentQuote.bind(this));
     saveBtnEl.addEventListener("click", this._saveCurrentQuote.bind(this));
+    translateBtnEl.addEventListener("click", () => {
+      this._translateCurrentQuote(this.#currentQuote);
+    });
   }
   async _getNewQuote() {
     try {
@@ -69,6 +75,26 @@ class App {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+  async _translateCurrentQuote(quotText) {
+    this.#lang === 0 ? this.#lang++ : this.#lang--;
+    if (this.#lang === 1) {
+      const res = await fetch("https://libretranslate.de/translate", {
+        method: "POST",
+        body: JSON.stringify({
+          q: quotText,
+          source: "en",
+          target: "ar",
+          format: "text",
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      quoteTextEl.textContent = data.translatedText;
+    }
+    if (this.#lang === 0) {
+      quoteTextEl.textContent = this.#currentQuote;
+    }
   }
 }
 const app = new App();
