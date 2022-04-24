@@ -12,16 +12,15 @@ const authorLinkEl = document.querySelector("#auther--link");
 
 class App {
   #currentQuote;
+  #currentQuoteAr;
   #currentAuthor;
-  #lang = 0;
+  #lang = "en";
   constructor() {
     this._getNewQuote();
     newQuoatBtnEl.addEventListener("click", this._getNewQuote.bind(this));
     copyBtnEl.addEventListener("click", this._copyCurrentQuote.bind(this));
     saveBtnEl.addEventListener("click", this._saveCurrentQuote.bind(this));
-    translateBtnEl.addEventListener("click", () => {
-      this._translateCurrentQuote(this.#currentQuote);
-    });
+    translateBtnEl.addEventListener("click", this._changeLang.bind(this));
   }
   async _getNewQuote() {
     try {
@@ -35,10 +34,24 @@ class App {
       if ((err = "too long quote")) this._getNewQuote();
     }
   }
-  _displayNewQuote(quote, author) {
+  async _displayNewQuote(quote, author) {
+    this.#lang = "en";
+    quoteTextEl.style.fontFamily = "'Marck Script', serif";
     quoteTextEl.textContent = quote;
     quoteAuthorEl.textContent = author;
+    await this._translateCurrentQuote(this.#currentQuote);
     authorLinkEl.href = `https://en.wikipedia.org/wiki/${author}`;
+  }
+  _changeLang() {
+    if (this.#lang === "ar") {
+      quoteTextEl.style.fontFamily = "'Marck Script', serif";
+      quoteTextEl.textContent = this.#currentQuote;
+      this.#lang = "en";
+    } else if (this.#lang === "en") {
+      quoteTextEl.style.fontFamily = "'Aref Ruqaa', serif";
+      quoteTextEl.textContent = this.#currentQuoteAr;
+      this.#lang = "ar";
+    }
   }
   _copyCurrentQuote() {
     const el = document.createElement("textarea");
@@ -77,24 +90,18 @@ class App {
     document.body.removeChild(link);
   }
   async _translateCurrentQuote(quotText) {
-    this.#lang === 0 ? this.#lang++ : this.#lang--;
-    if (this.#lang === 1) {
-      const res = await fetch("https://libretranslate.de/translate", {
-        method: "POST",
-        body: JSON.stringify({
-          q: quotText,
-          source: "en",
-          target: "ar",
-          format: "text",
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
-      quoteTextEl.textContent = data.translatedText;
-    }
-    if (this.#lang === 0) {
-      quoteTextEl.textContent = this.#currentQuote;
-    }
+    const res = await fetch("https://libretranslate.de/translate", {
+      method: "POST",
+      body: JSON.stringify({
+        q: quotText,
+        source: "en",
+        target: "ar",
+        format: "text",
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    this.#currentQuoteAr = data.translatedText;
   }
 }
 const app = new App();
