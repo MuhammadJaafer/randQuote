@@ -6,4 +6,4 @@ It is based on open-source project "quotable.io"
 
 and for translation it uses "libretranslate" also an open-source project
 
-Link: https://randquotee.netlify.app/
+Link: https://randquotee.netlify.app
