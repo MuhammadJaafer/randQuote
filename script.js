@@ -11,6 +11,7 @@ const authorLinkEl = document.querySelector("#auther--link");
 // >>>>>>>>>>>>>>>>>>>>>>>> //
 
 class App {
+  
   #currentQuote;
   #currentQuoteAr;
   #currentAuthor;
