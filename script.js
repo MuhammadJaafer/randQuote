@@ -1,4 +1,5 @@
 const quoteTextEl = document.querySelector("#quote--text");
+const quoteTextContainerEl = document.querySelector(".quote--text");
 const quoteAuthorEl = document.querySelector("#quote--outher");
 const newQuoatBtnEl = document.querySelector("#quote--btn");
 const copyBtnEl = document.querySelector("#copy--btn");
@@ -7,15 +8,16 @@ const translateBtnEl = document.querySelector("#translate--btn");
 const popupEl = document.querySelector("#custom-tooltip");
 const captureEl = document.querySelector(".quote--container");
 const authorLinkEl = document.querySelector("#auther--link");
-
+const tooFastEl = document.querySelector(".too-fast");
 // >>>>>>>>>>>>>>>>>>>>>>>> //
 
 class App {
-  
+  #newquote = true;
   #currentQuote;
   #currentQuoteAr;
   #currentAuthor;
   #lang = "en";
+  #timeOut = 1;
   constructor() {
     this._getNewQuote();
     newQuoatBtnEl.addEventListener("click", this._getNewQuote.bind(this));
@@ -25,33 +27,72 @@ class App {
   }
   async _getNewQuote() {
     try {
+      if (!this.#newquote) {
+        tooFastEl.style.opacity = 100;
+        setTimeout(
+          () => (tooFastEl.style.opacity = 0),
+          (this.#timeOut - 0.3) * 1000
+        );
+        return;
+      }
+      this._timeOut(this.#timeOut);
+      this._clear();
+      this._displayspinner();
       const res = await fetch("https://api.quotable.io/random");
       const data = await res.json();
-      if (data.length > 200) throw new Error("too long quote");
       this.#currentQuote = data.content;
       this.#currentAuthor = data.author;
       this._displayNewQuote(this.#currentQuote, this.#currentAuthor);
+      if (data.length > 200) throw new Error("too long quote");
     } catch (err) {
-      if ((err = "too long quote")) this._getNewQuote();
+      throw err;
     }
   }
+  async _timeOut(sec) {
+    this.#newquote = false;
+    setTimeout(() => {
+      this.#newquote = true;
+    }, sec * 1000);
+  }
+  _clear() {
+    quoteAuthorEl.textContent = "";
+    quoteTextEl.textContent = "";
+  }
+  _clearspinner() {
+    document.querySelector(".spinner").remove();
+  }
+  _displayspinner() {
+    const markup = `
+    <div class="spinner">
+                <img src="./icons/loading-spinner.svg" alt="" />
+              </div>
+    `;
+    quoteTextContainerEl.insertAdjacentHTML("afterbegin", markup);
+  }
   async _displayNewQuote(quote, author) {
-    this.#lang = "en";
-    quoteTextEl.style.fontFamily = "'Marck Script', serif";
-    quoteTextEl.textContent = quote;
-    quoteAuthorEl.textContent = author;
-    await this._translateCurrentQuote(this.#currentQuote);
-    authorLinkEl.href = `https://en.wikipedia.org/wiki/${author}`;
+    try {
+      this._clearspinner();
+      this.#lang = "en";
+      quoteTextEl.style.fontFamily = "'Marck Script', serif";
+      quoteTextEl.textContent = quote;
+      quoteAuthorEl.textContent = author;
+      authorLinkEl.href = `https://en.wikipedia.org/wiki/${author}`;
+      await this._translateCurrentQuote(this.#currentQuote);
+    } catch (err) {
+      console.log(err);
+    }
   }
   _changeLang() {
-    if (this.#lang === "ar") {
-      quoteTextEl.style.fontFamily = "'Marck Script', serif";
-      quoteTextEl.textContent = this.#currentQuote;
-      this.#lang = "en";
-    } else if (this.#lang === "en") {
-      quoteTextEl.style.fontFamily = "'Aref Ruqaa', serif";
-      quoteTextEl.textContent = this.#currentQuoteAr;
-      this.#lang = "ar";
+    if (this.#currentQuoteAr) {
+      if (this.#lang === "ar") {
+        quoteTextEl.style.fontFamily = "'Marck Script', serif";
+        quoteTextEl.textContent = this.#currentQuote;
+        this.#lang = "en";
+      } else if (this.#lang === "en") {
+        quoteTextEl.style.fontFamily = "'Aref Ruqaa', serif";
+        quoteTextEl.textContent = this.#currentQuoteAr;
+        this.#lang = "ar";
+      }
     }
   }
   _copyCurrentQuote() {
