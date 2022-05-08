@@ -157,11 +157,10 @@ section {
   width: 115%;
 }
 .quote--btn {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 0 auto;
+  width: fit-content;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
 .quote--btn button {
   background: none;
